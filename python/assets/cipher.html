@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caesar Cipher — Live Encoding</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; }
+  .cipher-wrap { background: #1a1a2e; border-radius: 12px; overflow: hidden; font-family: monospace; }
+  .cipher-bar { background: #2d2d44; padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+  .cdot { width: 12px; height: 12px; border-radius: 50%; }
+  .cipher-body { padding: 28px 32px 32px; }
+  .c-title { color: #888; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; font-family: sans-serif; }
+  .c-row { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .c-cell { width: 42px; height: 66px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #2a2a40; border: 1px solid #3a3a55; transition: all .25s ease; padding: 6px 0; }
+  .c-cell.active { background: #3d2f00; border-color: #ffd173; transform: translateY(-3px); box-shadow: 0 4px 16px rgba(255,209,115,.25); }
+  .c-cell.done { background: #0d2b1a; border-color: #5ccfe6; }
+  .c-plain { font-size: 20px; font-weight: 600; color: #d4d4d4; line-height: 1; }
+  .c-enc { font-size: 16px; color: #888; line-height: 1; transition: color .25s ease; }
+  .c-cell.active .c-enc { color: #ffd173; }
+  .c-cell.done .c-enc { color: #a9dc76; }
+  .c-arrow { color: #5ccfe6; font-size: 12px; line-height: 1; }
+  .c-key-row { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+  .c-key-badge { background: #2d2d44; border: 1px solid #444; border-radius: 8px; padding: 6px 14px; color: #ffd173; font-size: 13px; }
+  .c-key-label { color: #666; font-size: 12px; font-family: sans-serif; }
+  .c-restart { background: none; border: 1px solid #444; border-radius: 8px; padding: 6px 14px; color: #888; font-size: 12px; font-family: sans-serif; cursor: pointer; transition: all .2s; margin-left: auto; }
+  .c-restart:hover { border-color: #5ccfe6; color: #5ccfe6; }
+  .progress-bar { height: 2px; background: #2d2d44; border-radius: 1px; overflow: hidden; }
+  .progress-fill { height: 100%; background: #5ccfe6; width: 0%; transition: width .3s ease; }
+</style>
+</head>
+<body>
+<div class="cipher-wrap">
+  <div class="cipher-bar">
+    <div class="cdot" style="background:#ff5f57"></div>
+    <div class="cdot" style="background:#febc2e"></div>
+    <div class="cdot" style="background:#28c840"></div>
+    <span style="color:#888;font-size:12px;margin-left:8px;font-family:monospace">cipher — live encoding</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+  <div class="cipher-body">
+    <div class="c-title">Шифрование символов</div>
+    <div class="c-row" id="cells"></div>
+    <div class="c-key-row">
+      <div class="c-key-badge">K = 3</div>
+      <span class="c-key-label">сдвиг</span>
+      <button class="c-restart" onclick="restart()">↺ повторить</button>
+    </div>
+  </div>
+</div>
+<script>
+const words = ['hello world', 'caesar', 'bash script', 'python'];
+let wordIdx = 0, timer = null;
+function encode(c, k) {
+  if (c >= 'a' && c <= 'z') return String.fromCharCode((c.charCodeAt(0) - 97 + k) % 26 + 97);
+  if (c >= 'A' && c <= 'Z') return String.fromCharCode((c.charCodeAt(0) - 65 + k) % 26 + 65);
+  return c;
+}
+function buildCells(word) {
+  const container = document.getElementById('cells');
+  container.innerHTML = '';
+  [...word].forEach((ch, i) => {
+    const cell = document.createElement('div');
+    cell.className = 'c-cell';
+    cell.id = 'cell-' + i;
+    cell.innerHTML = `<span class="c-plain">${ch === ' ' ? '·' : ch}</span><span class="c-arrow">↓</span><span class="c-enc" id="enc-${i}">${ch === ' ' ? '·' : '?'}</span>`;
+    container.appendChild(cell);
+  });
+}
+function animate(word) {
+  buildCells(word);
+  const prog = document.getElementById('prog');
+  prog.style.width = '0%';
+  let i = 0;
+  if (timer) clearInterval(timer);
+  timer = setInterval(() => {
+    if (i > 0) {
+      const prev = document.getElementById('cell-' + (i - 1));
+      if (prev) prev.className = 'c-cell done';
+    }
+    if (i >= word.length) {
+      clearInterval(timer);
+      prog.style.width = '100%';
+      setTimeout(() => { wordIdx = (wordIdx + 1) % words.length; animate(words[wordIdx]); }, 2200);
+      return;
+    }
+    const cell = document.getElementById('cell-' + i);
+    const encEl = document.getElementById('enc-' + i);
+    if (cell) cell.className = 'c-cell active';
+    const ch = word[i];
+    if (encEl) encEl.textContent = ch === ' ' ? '·' : encode(ch, 3);
+    prog.style.width = ((i + 1) / word.length * 100) + '%';
+    i++;
+  }, 200);
+}
+function restart() { if (timer) clearInterval(timer); animate(words[wordIdx]); }
+animate(words[0]);
+</script>
+</body>
+</html>
