@@ -1,0 +1,122 @@
+<svg width="680" viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .letter { font-family: monospace; font-size: 13px; font-weight: 500; fill: #888; }
+      .letter-hl { font-family: monospace; font-size: 13px; font-weight: 500; fill: #EF9F27; }
+      .letter-enc { font-family: monospace; font-size: 13px; font-weight: 500; fill: #1D9E75; }
+      .lbl { font-family: sans-serif; font-size: 10px; fill: #888; }
+      .title { font-family: sans-serif; font-size: 12px; font-weight: 500; fill: #666; }
+      @media (prefers-color-scheme: dark) {
+        .letter { fill: #888; }
+        .title { fill: #aaa; }
+        .lbl { fill: #888; }
+      }
+      .top-row text, .bot-row text {
+        animation: slideIn 1.2s ease-out both;
+      }
+      @keyframes slideIn {
+        from { opacity:0; transform: translateY(-6px); }
+        to   { opacity:1; transform: translateY(0); }
+      }
+      .pulse { animation: pulse 2s ease-in-out infinite; }
+      @keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+      .example-char { animation: pop 0.6s cubic-bezier(.36,1.5,.5,1) both; }
+      @keyframes pop {
+        from { opacity:0; transform: scale(0.5); }
+        to   { opacity:1; transform: scale(1); }
+      }
+    </style>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <text class="title" x="340" y="30" text-anchor="middle">Шифр Цезаря — сдвиг алфавита на ключ K</text>
+
+  <text class="lbl" x="38" y="68">Исходный</text>
+  <g class="top-row">
+    <text class="letter-hl" x="38"  y="88" style="animation-delay:0.00s">a</text>
+    <text class="letter-hl" x="58"  y="88" style="animation-delay:0.04s">b</text>
+    <text class="letter-hl" x="78"  y="88" style="animation-delay:0.08s">c</text>
+    <text class="letter"    x="98"  y="88" style="animation-delay:0.12s">d</text>
+    <text class="letter"    x="118" y="88" style="animation-delay:0.16s">e</text>
+    <text class="letter"    x="138" y="88" style="animation-delay:0.20s">f</text>
+    <text class="letter"    x="158" y="88" style="animation-delay:0.24s">g</text>
+    <text class="letter"    x="178" y="88" style="animation-delay:0.28s">h</text>
+    <text class="letter"    x="198" y="88" style="animation-delay:0.32s">i</text>
+    <text class="letter"    x="218" y="88" style="animation-delay:0.36s">j</text>
+    <text class="letter"    x="238" y="88" style="animation-delay:0.40s">k</text>
+    <text class="letter"    x="258" y="88" style="animation-delay:0.44s">l</text>
+    <text class="letter"    x="278" y="88" style="animation-delay:0.48s">m</text>
+    <text class="letter"    x="298" y="88" style="animation-delay:0.52s">n</text>
+    <text class="letter"    x="318" y="88" style="animation-delay:0.56s">o</text>
+    <text class="letter"    x="338" y="88" style="animation-delay:0.60s">p</text>
+    <text class="letter"    x="358" y="88" style="animation-delay:0.64s">q</text>
+    <text class="letter"    x="378" y="88" style="animation-delay:0.68s">r</text>
+    <text class="letter"    x="398" y="88" style="animation-delay:0.72s">s</text>
+    <text class="letter"    x="418" y="88" style="animation-delay:0.76s">t</text>
+    <text class="letter"    x="438" y="88" style="animation-delay:0.80s">u</text>
+    <text class="letter"    x="458" y="88" style="animation-delay:0.84s">v</text>
+    <text class="letter"    x="478" y="88" style="animation-delay:0.88s">w</text>
+    <text class="letter"    x="498" y="88" style="animation-delay:0.92s">x</text>
+    <text class="letter"    x="518" y="88" style="animation-delay:0.96s">y</text>
+    <text class="letter"    x="538" y="88" style="animation-delay:1.00s">z</text>
+  </g>
+
+  <g class="pulse">
+    <line x1="41" y1="95" x2="41" y2="117" stroke="#EF9F27" stroke-width="1.2" marker-end="url(#ar)"/>
+    <line x1="61" y1="95" x2="61" y2="117" stroke="#EF9F27" stroke-width="1.2" marker-end="url(#ar)"/>
+    <line x1="81" y1="95" x2="81" y2="117" stroke="#EF9F27" stroke-width="1.2" marker-end="url(#ar)"/>
+  </g>
+
+  <rect x="568" y="74" width="54" height="22" rx="6" fill="#BA7517" opacity="0.15"/>
+  <text x="595" y="89" text-anchor="middle" font-family="monospace" font-size="12" font-weight="500" fill="#BA7517">K = 3</text>
+
+  <text class="lbl" x="38" y="114">Зашифрованный</text>
+  <g class="bot-row">
+    <text class="letter-enc" x="38"  y="134" style="animation-delay:0.10s">d</text>
+    <text class="letter-enc" x="58"  y="134" style="animation-delay:0.14s">e</text>
+    <text class="letter-enc" x="78"  y="134" style="animation-delay:0.18s">f</text>
+    <text class="letter"     x="98"  y="134" style="animation-delay:0.22s">g</text>
+    <text class="letter"     x="118" y="134" style="animation-delay:0.26s">h</text>
+    <text class="letter"     x="138" y="134" style="animation-delay:0.30s">i</text>
+    <text class="letter"     x="158" y="134" style="animation-delay:0.34s">j</text>
+    <text class="letter"     x="178" y="134" style="animation-delay:0.38s">k</text>
+    <text class="letter"     x="198" y="134" style="animation-delay:0.42s">l</text>
+    <text class="letter"     x="218" y="134" style="animation-delay:0.46s">m</text>
+    <text class="letter"     x="238" y="134" style="animation-delay:0.50s">n</text>
+    <text class="letter"     x="258" y="134" style="animation-delay:0.54s">o</text>
+    <text class="letter"     x="278" y="134" style="animation-delay:0.58s">p</text>
+    <text class="letter"     x="298" y="134" style="animation-delay:0.62s">q</text>
+    <text class="letter"     x="318" y="134" style="animation-delay:0.66s">r</text>
+    <text class="letter"     x="338" y="134" style="animation-delay:0.70s">s</text>
+    <text class="letter"     x="358" y="134" style="animation-delay:0.74s">t</text>
+    <text class="letter"     x="378" y="134" style="animation-delay:0.78s">u</text>
+    <text class="letter"     x="398" y="134" style="animation-delay:0.82s">v</text>
+    <text class="letter"     x="418" y="134" style="animation-delay:0.86s">w</text>
+    <text class="letter"     x="438" y="134" style="animation-delay:0.90s">x</text>
+    <text class="letter"     x="458" y="134" style="animation-delay:0.94s">y</text>
+    <text class="letter"     x="478" y="134" style="animation-delay:0.98s">z</text>
+    <text class="letter-hl"  x="498" y="134" style="animation-delay:1.02s">a</text>
+    <text class="letter-hl"  x="518" y="134" style="animation-delay:1.06s">b</text>
+    <text class="letter-hl"  x="538" y="134" style="animation-delay:1.10s">c</text>
+  </g>
+
+  <line x1="30" y1="158" x2="650" y2="158" stroke="#ccc" stroke-width="0.5"/>
+
+  <text class="lbl" x="340" y="178" text-anchor="middle">Пример шифрования слова</text>
+
+  <text class="example-char" x="170" y="200" text-anchor="middle" font-family="monospace" font-size="16" font-weight="500" fill="#888" style="animation-delay:1.2s">h</text>
+  <text x="170" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#1D9E75" style="animation:pop .6s cubic-bezier(.36,1.5,.5,1) 1.5s both">k</text>
+  <text class="example-char" x="220" y="200" text-anchor="middle" font-family="monospace" font-size="16" font-weight="500" fill="#888" style="animation-delay:1.35s">e</text>
+  <text x="220" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#1D9E75" style="animation:pop .6s cubic-bezier(.36,1.5,.5,1) 1.65s both">h</text>
+  <text class="example-char" x="270" y="200" text-anchor="middle" font-family="monospace" font-size="16" font-weight="500" fill="#888" style="animation-delay:1.5s">l</text>
+  <text x="270" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#1D9E75" style="animation:pop .6s cubic-bezier(.36,1.5,.5,1) 1.8s both">o</text>
+  <text class="example-char" x="320" y="200" text-anchor="middle" font-family="monospace" font-size="16" font-weight="500" fill="#888" style="animation-delay:1.65s">l</text>
+  <text x="320" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#1D9E75" style="animation:pop .6s cubic-bezier(.36,1.5,.5,1) 1.95s both">o</text>
+  <text class="example-char" x="370" y="200" text-anchor="middle" font-family="monospace" font-size="16" font-weight="500" fill="#888" style="animation-delay:1.8s">o</text>
+  <text x="370" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#1D9E75" style="animation:pop .6s cubic-bezier(.36,1.5,.5,1) 2.1s both">r</text>
+  <text x="420" y="200" text-anchor="middle" font-family="monospace" font-size="16" fill="#ccc" opacity="0.5">·</text>
+  <text class="example-char" x="470" y="200" text-anchor="middle" font-family="monospace" font-size="16" font-weight="500" fill="#888" style="animation-delay:1.95s">w</text>
+  <text x="470" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#1D9E75" style="animation:pop .6s cubic-bezier(.36,1.5,.5,1) 2.25s both">z</text>
+</svg>
